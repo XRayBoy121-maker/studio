@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Clock, Mail, Tag, User, GraduationCap } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -43,7 +43,8 @@ const FormSchema = z.object({
   }),
 })
 
-export default function TeacherProfilePage({ params }: { params: { id: string } }) {
+export default function TeacherProfilePage() {
+  const params = useParams<{ id: string }>();
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const teacher = teachers.find((t) => t.id === params.id);
   const { toast } = useToast()
